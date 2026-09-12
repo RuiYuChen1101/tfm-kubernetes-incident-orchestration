@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crashloop-error
+  namespace: incident-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crashloop-error
+  template:
+    metadata:
+      labels:
+        app: crashloop-error
+    spec:
+      containers:
+        - name: app
+          image: busybox
+          command: ["sh", "-c", "echo 'Simulating crash'; exit 1"]

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memory-risk
+  namespace: incident-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: memory-risk
+  template:
+    metadata:
+      labels:
+        app: memory-risk
+    spec:
+      containers:
+        - name: app
+          image: python:3.12-slim
+          command: ["python", "-c"]
+          args:
+            - |
+              import time
+
+              data = []
+              for i in range(120):
+                  data.append("x" * 1024 * 1024)
+                  print(f"allocated {i + 1} MB", flush=True)
+                  time.sleep(2)
+
+              while True:
+                  time.sleep(60)
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "50m"
+            limits:
+              memory: "160Mi"
+              cpu: "500m"

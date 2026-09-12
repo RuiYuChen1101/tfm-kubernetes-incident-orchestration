@@ -1,0 +1,14 @@
+apiVersion: kagent.dev/v1alpha2
+kind: ModelConfig
+metadata:
+  name: default-model-config
+  namespace: kagent
+spec:
+  model: qwen3:8b
+  ollama:
+    host: http://ollama.ollama.svc.cluster.local
+    options:
+      num_ctx: '16384'
+      num_predict: '3000'
+      temperature: '0.1'
+  provider: Ollama

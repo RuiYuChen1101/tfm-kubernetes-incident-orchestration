@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpu-request-risk
+  namespace: incident-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cpu-request-risk
+  template:
+    metadata:
+      labels:
+        app: cpu-request-risk
+    spec:
+      containers:
+        - name: app
+          image: incident-cpu-request-risk:v1
+          imagePullPolicy: Never
+          resources:
+            requests:
+              cpu: 100m
+              memory: 32Mi
+            limits:
+              cpu: "2"
+              memory: 128Mi

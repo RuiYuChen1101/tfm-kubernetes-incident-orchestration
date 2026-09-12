@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memory-risk
+  namespace: incident-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: memory-risk
+  template:
+    metadata:
+      labels:
+        app: memory-risk
+    spec:
+      containers:
+        - name: app
+          image: incident-memory-risk:v2
+          imagePullPolicy: Never
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 500m
+              memory: 160Mi

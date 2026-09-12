@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpu-risk
+  namespace: incident-demo
+  labels:
+    app: cpu-risk
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cpu-risk
+  template:
+    metadata:
+      labels:
+        app: cpu-risk
+    spec:
+      containers:
+        - name: app
+          image: python:3.12-slim
+          command:
+            - python
+            - -c
+            - |
+              print("starting cpu-risk proactive scenario", flush=True)
+              x = 0
+              while True:
+                  for i in range(3000000):
+                      x = (x + i * i) % 1000003
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "128Mi"

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: error-log-burst
+  namespace: incident-demo
+  labels:
+    app: error-log-burst
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: error-log-burst
+  template:
+    metadata:
+      labels:
+        app: error-log-burst
+    spec:
+      containers:
+        - name: app
+          image: python:3.12-slim
+          command:
+            - python
+            - -c
+            - |
+              import time
+              i = 0
+              print("starting error-log-burst proactive scenario", flush=True)
+              while True:
+                  i += 1
+                  print(f"ERROR proactive signal: repeated application error without crash #{i}", flush=True)
+                  time.sleep(5)
+          resources:
+            requests:
+              cpu: "20m"
+              memory: "32Mi"
+            limits:
+              cpu: "200m"
+              memory: "128Mi"

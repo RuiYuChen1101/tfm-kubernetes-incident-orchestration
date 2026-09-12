@@ -1,0 +1,56 @@
+# -------------------------
+# Python
+# -------------------------
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# -------------------------
+# Secrets / local config
+# -------------------------
+.env
+*.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# -------------------------
+# Runtime / generated data
+# -------------------------
+outputs/
+runtime_logs/
+build_logs/
+*.log
+
+# -------------------------
+# Backups / experiments
+# -------------------------
+archive/
+patches/
+coordinator_backup_*/
+coordinator-evidence-fix-*/
+validation-scenarios-opaque-*/
+*.tar.gz
+*.bak
+*.bak-*
+.gitignore.before-github
+
+# -------------------------
+# Upstream cloned projects
+# -------------------------
+opensre-src/
+kagent-src/
+
+# -------------------------
+# IDE / OS
+# -------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Legacy compatibility wrapper; implementation is in coordinator/opensre_runner.py
+/opensre_runner.py

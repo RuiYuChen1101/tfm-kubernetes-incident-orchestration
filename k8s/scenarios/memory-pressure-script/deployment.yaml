@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: memory-pressure-script
+  namespace: incident-demo
+  labels:
+    app: memory-pressure-script
+    scenario: preventive-memory-pressure
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: memory-pressure-script
+  template:
+    metadata:
+      labels:
+        app: memory-pressure-script
+        scenario: preventive-memory-pressure
+    spec:
+      containers:
+        - name: app
+          image: incident-memory-pressure-script:1.0
+          imagePullPolicy: Never
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "500m"
+              memory: "160Mi"

@@ -1,0 +1,5 @@
+{
+  "schema_version": 1,
+  "sync_interval_seconds": 30,
+  "source": "primary-inventory"
+}

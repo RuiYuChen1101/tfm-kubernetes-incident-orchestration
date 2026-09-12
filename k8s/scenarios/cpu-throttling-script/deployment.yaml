@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpu-throttling-script
+  namespace: incident-demo
+  labels:
+    app: cpu-throttling-script
+    scenario: preventive-cpu-throttling
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cpu-throttling-script
+  template:
+    metadata:
+      labels:
+        app: cpu-throttling-script
+        scenario: preventive-cpu-throttling
+    spec:
+      containers:
+        - name: app
+          image: incident-cpu-throttling-script:1.0
+          imagePullPolicy: Never
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "128Mi"

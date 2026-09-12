@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crashloop-error
+  namespace: incident-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crashloop-error
+  template:
+    metadata:
+      labels:
+        app: crashloop-error
+    spec:
+      containers:
+        - name: app
+          image: python:3.12-slim
+          command:
+            - python
+            - -c
+          args:
+            - |
+              import time
+              print("starting crashloop test", flush=True)
+              time.sleep(3)
+              raise RuntimeError("simulated application failure")

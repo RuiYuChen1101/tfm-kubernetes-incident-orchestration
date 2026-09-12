@@ -1,0 +1,35 @@
+a2aClientTimeout: 30m
+argo-rollouts-agent:
+  enabled: true
+cilium-debug-agent:
+  enabled: true
+cilium-manager-agent:
+  enabled: true
+cilium-policy-agent:
+  enabled: true
+controller:
+  goAgentImage:
+    pullPolicy: IfNotPresent
+    registry: docker.io
+    repository: library/kagent-golang-adk
+    tag: 0.10.0-rc1-timeout2h
+helm-agent:
+  enabled: true
+istio-agent:
+  enabled: true
+k8s-agent:
+  enabled: true
+kgateway-agent:
+  enabled: true
+observability-agent:
+  enabled: true
+promql-agent:
+  enabled: true
+providers:
+  default: ollama
+  ollama:
+    config:
+      host: http://ollama.ollama.svc.cluster.local
+    model: qwen3:8b
+  openAI:
+    apiKey: ""
